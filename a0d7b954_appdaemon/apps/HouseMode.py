@@ -21,17 +21,19 @@ class HouseMode(hass.Hass):
             "cover.kitchen"
             "cover.living_room"
             "cover.office"
+            "cover.office"
             "cover.laundry"
             "cover.bedroom_rc"
             "cover.bathroom"
             "cover.master_bedroom"
             "cover.bedroom_ricardo"
-            "cover.bedroom_guest"
+            "cover.bedroom_henrique"
         ]
 
         self.trackWorkingLights = [
             "light.kitchen",
             "light.office",
+            "light.bedroom_rc",
             "light.laundry",
             "light.hall_group",
             "light.bathroom_rc",
@@ -50,6 +52,7 @@ class HouseMode(hass.Hass):
             "binary_sensor.motion_sensor_office",
             "binary_sensor.motion_sensor_kitchen",
             "binary_sensor.motion_sensor_living_room",
+            "binary_sensor.motion_sensor_laundry",
         ]
 
         self.trackState = [
@@ -174,7 +177,7 @@ class HouseMode(hass.Hass):
 
     def new_house_mode_from_sleep(self, trigger):
         newMode = "Sleep"
-        if trigger == Event.LIGHT_ON:
+        if trigger == Event.LIGHT_ON or trigger == Event.PRESENCE:
             newMode = self.preffered_house_mode()
         return newMode
 
